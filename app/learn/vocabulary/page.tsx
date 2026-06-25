@@ -7,29 +7,174 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Volume2, ArrowRight, BookOpen, ChevronRight } from 'lucide-react';
+import { Search, Volume2, BookOpen, ChevronRight } from 'lucide-react';
 
-const vocabularyData = [
-  { japanese: 'おはようございます', romaji: 'ohayou gozaimasu', english: 'Good morning (polite)', tamil: 'காலை வணக்கம்', category: 'Greetings', level: 'N5' },
-  { japanese: 'ありがとう', romaji: 'arigatou', english: 'Thank you', tamil: 'நன்றி', category: 'Greetings', level: 'N5' },
-  { japanese: '水', romaji: 'mizu', english: 'Water', tamil: 'தண்ணீர்', category: 'Nouns', level: 'N5' },
-  { japanese: '食べる', romaji: 'taberu', english: 'To eat', tamil: 'சாப்பிடு', category: 'Verbs', level: 'N5' },
-  { japanese: '飲む', romaji: 'nomu', english: 'To drink', tamil: 'குடி', category: 'Verbs', level: 'N5' },
-  { japanese: '大きい', romaji: 'ookii', english: 'Big', tamil: 'பெரிய', category: 'Adjectives', level: 'N5' },
-  { japanese: '学校', romaji: 'gakkou', english: 'School', tamil: 'பள்ளி', category: 'Places', level: 'N5' },
-  { japanese: '先生', romaji: 'sensei', english: 'Teacher', tamil: 'ஆசிரியர்', category: 'People', level: 'N5' },
+type Word = {
+  japanese: string;
+  romaji: string;
+  english: string;
+  tamil: string;
+  category: string;
+  level: string;
+  example: string;
+  exampleEn: string;
+};
+
+const vocabularyData: Word[] = [
+  {
+    japanese: 'おはようございます',
+    romaji: 'ohayou gozaimasu',
+    english: 'Good morning (polite)',
+    tamil: 'காலை வணக்கம்',
+    category: 'Greetings',
+    level: 'N5',
+    example: 'おはようございます。今日もいい天気ですね。',
+    exampleEn: 'Good morning. It is nice weather today as well.',
+  },
+  {
+    japanese: 'ありがとう',
+    romaji: 'arigatou',
+    english: 'Thank you',
+    tamil: 'நன்றி',
+    category: 'Greetings',
+    level: 'N5',
+    example: '手伝ってくれてありがとう。',
+    exampleEn: 'Thank you for helping me.',
+  },
+  {
+    japanese: '学校',
+    romaji: 'gakkou',
+    english: 'School',
+    tamil: 'பள்ளி',
+    category: 'School',
+    level: 'N5',
+    example: '私は毎日学校へ行きます。',
+    exampleEn: 'I go to school every day.',
+  },
+  {
+    japanese: '先生',
+    romaji: 'sensei',
+    english: 'Teacher',
+    tamil: 'ஆசிரியர்',
+    category: 'School',
+    level: 'N5',
+    example: '田中先生は日本語を教えます。',
+    exampleEn: 'Tanaka-sensei teaches Japanese.',
+  },
+  {
+    japanese: '仕事',
+    romaji: 'shigoto',
+    english: 'Work, Job',
+    tamil: 'வேலை',
+    category: 'Work',
+    level: 'N5',
+    example: '父の仕事は大変です。',
+    exampleEn: 'My father\'s work is demanding.',
+  },
+  {
+    japanese: '会社',
+    romaji: 'kaisha',
+    english: 'Company',
+    tamil: 'நிறுவனம்',
+    category: 'Work',
+    level: 'N4',
+    example: 'あの会社で働いています。',
+    exampleEn: 'I work at that company.',
+  },
+  {
+    japanese: '水',
+    romaji: 'mizu',
+    english: 'Water',
+    tamil: 'தண்ணீர்',
+    category: 'Food',
+    level: 'N5',
+    example: '水を飲みたいです。',
+    exampleEn: 'I want to drink water.',
+  },
+  {
+    japanese: 'ご飯',
+    romaji: 'gohan',
+    english: 'Rice, Meal',
+    tamil: 'சாதம்',
+    category: 'Food',
+    level: 'N5',
+    example: '毎朝ご飯を食べます。',
+    exampleEn: 'I eat rice every morning.',
+  },
+  {
+    japanese: '電車',
+    romaji: 'densha',
+    english: 'Train',
+    tamil: 'ரயில்',
+    category: 'Travel',
+    level: 'N5',
+    example: '電車で駅へ行きます。',
+    exampleEn: 'I go to the station by train.',
+  },
+  {
+    japanese: '旅行',
+    romaji: 'ryokou',
+    english: 'Travel',
+    tamil: 'பயணம்',
+    category: 'Travel',
+    level: 'N4',
+    example: '来月、日本へ旅行します。',
+    exampleEn: 'I will travel to Japan next month.',
+  },
+  {
+    japanese: '家族',
+    romaji: 'kazoku',
+    english: 'Family',
+    tamil: 'குடும்பம்',
+    category: 'Family',
+    level: 'N5',
+    example: '私の家族は五人です。',
+    exampleEn: 'My family has five people.',
+  },
+  {
+    japanese: '母',
+    romaji: 'haha',
+    english: 'Mother (my own)',
+    tamil: 'தாய்',
+    category: 'Family',
+    level: 'N5',
+    example: '母は料理が上手です。',
+    exampleEn: 'My mother is good at cooking.',
+  },
+  {
+    japanese: '山',
+    romaji: 'yama',
+    english: 'Mountain',
+    tamil: 'மலை',
+    category: 'Nature',
+    level: 'N5',
+    example: '週末に山へ登ります。',
+    exampleEn: 'I climb a mountain on weekends.',
+  },
+  {
+    japanese: '川',
+    romaji: 'kawa',
+    english: 'River',
+    tamil: 'ஆறு',
+    category: 'Nature',
+    level: 'N5',
+    example: 'この川はきれいです。',
+    exampleEn: 'This river is beautiful.',
+  },
 ];
 
-const categories = ['All', 'Greetings', 'Nouns', 'Verbs', 'Adjectives', 'Places', 'People'];
-const levels = ['All', 'N5', 'N4', 'N3', 'N2'];
+const categories = ['All', 'Greetings', 'Daily Life', 'School', 'Work', 'Food', 'Travel', 'Family', 'Nature'];
 
 export default function VocabularyPage() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const filtered = vocabularyData.filter((word) => {
-    const matchesSearch = word.japanese.includes(search) || word.romaji.includes(search) || word.english.includes(search);
+    const q = search.toLowerCase();
+    const matchesSearch =
+      word.japanese.includes(search) ||
+      word.romaji.toLowerCase().includes(q) ||
+      word.english.toLowerCase().includes(q);
     const matchesCategory = selectedCategory === 'All' || word.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -54,19 +199,34 @@ export default function VocabularyPage() {
               </div>
               <div>
                 <h1 className="text-3xl font-bold">Japanese Vocabulary</h1>
-                <p className="text-muted-foreground">Build your word bank</p>
+                <p className="text-muted-foreground">Build your word bank with meanings in Tamil & English</p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input placeholder="Search..." className="pl-10" value={search} onChange={(e) => setSearch(e.target.value)} />
-              </div>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-[180px]"><SelectValue placeholder="Category" /></SelectTrigger>
-                <SelectContent>{categories.map((cat) => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}</SelectContent>
-              </Select>
+            <div className="relative mt-8 max-w-xl">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Input
+                placeholder="Search by Japanese, romaji, or English..."
+                className="pl-10"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 mt-6">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition ${
+                    selectedCategory === cat
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground hover:bg-muted/70'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
             </div>
           </div>
         </section>
@@ -74,29 +234,50 @@ export default function VocabularyPage() {
         <section className="py-12">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-muted-foreground mb-6">Showing {filtered.length} words</p>
-            <div className="space-y-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((word, i) => (
-                <Card key={i} className="overflow-hidden">
-                  <CardContent className="p-0">
-                    <div className="grid md:grid-cols-4 gap-0">
-                      <div className="p-6 bg-muted/30 text-center">
+                <Card key={i} className="overflow-hidden hover:shadow-lg transition">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
                         <p className="text-3xl font-semibold kanji-text">{word.japanese}</p>
                         <p className="text-sm text-muted-foreground">{word.romaji}</p>
-                        <Button variant="ghost" size="icon" className="mt-2"><Volume2 className="h-4 w-4" /></Button>
                       </div>
-                      <div className="p-6 md:col-span-2 grid grid-cols-2 gap-4">
-                        <div><p className="text-xs text-muted-foreground">English</p><p className="font-medium">{word.english}</p></div>
-                        <div><p className="text-xs text-muted-foreground">Tamil</p><p className="font-medium">{word.tamil}</p></div>
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Volume2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 mb-4">
+                      <div>
+                        <p className="text-xs text-muted-foreground">English</p>
+                        <p className="font-medium">{word.english}</p>
                       </div>
-                      <div className="p-6 bg-muted/10 flex items-center justify-end gap-2">
-                        <Badge variant="secondary">{word.category}</Badge>
-                        <Badge variant="outline">{word.level}</Badge>
+                      <div>
+                        <p className="text-xs text-muted-foreground">Tamil</p>
+                        <p className="font-medium">{word.tamil}</p>
                       </div>
+                    </div>
+
+                    <div className="bg-muted/30 rounded-lg p-3 mb-4">
+                      <p className="text-sm kanji-text mb-1">{word.example}</p>
+                      <p className="text-xs text-muted-foreground">{word.exampleEn}</p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">{word.category}</Badge>
+                      <Badge variant="outline">{word.level}</Badge>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
+
+            {filtered.length === 0 && (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground">No words found. Try a different search or category.</p>
+              </div>
+            )}
           </div>
         </section>
       </main>

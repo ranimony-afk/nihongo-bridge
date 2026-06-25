@@ -5,18 +5,121 @@ import Link from 'next/link';
 import { Header, Footer } from '@/components/layout';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, PenTool, ChevronRight } from 'lucide-react';
 
-const kanjiData = [
-  { kanji: '日', meaning_en: 'Day, Sun', meaning_ta: 'நாள்', onyomi: 'ニチ', kunyomi: 'ひ', strokes: 4, examples: ['日本', '日曜日'], level: 'N5' },
-  { kanji: '本', meaning_en: 'Book, Origin', meaning_ta: 'புத்தகம்', onyomi: 'ホン', kunyomi: 'もと', strokes: 5, examples: ['日本', '本'], level: 'N5' },
-  { kanji: '人', meaning_en: 'Person', meaning_ta: 'மனிதர்', onyomi: 'ジン', kunyomi: 'ひと', strokes: 2, examples: ['日本人', '三人'], level: 'N5' },
-  { kanji: '学', meaning_en: 'Learn', meaning_ta: 'கற்றல்', onyomi: 'ガク', kunyomi: 'まなぶ', strokes: 8, examples: ['学校', '学生'], level: 'N5' },
-  { kanji: '大', meaning_en: 'Big', meaning_ta: 'பெரிய', onyomi: 'ダイ', kunyomi: 'おおきい', strokes: 3, examples: ['大丈夫', '大学'], level: 'N5' },
-  { kanji: '小', meaning_en: 'Small', meaning_ta: 'சிறிய', onyomi: 'ショウ', kunyomi: 'ちいさい', strokes: 3, examples: ['小学校', '小さい'], level: 'N5' },
+type Kanji = {
+  kanji: string;
+  meaning_en: string;
+  meaning_ta: string;
+  onyomi: string;
+  kunyomi: string;
+  strokes: number;
+  examples: string[];
+  level: string;
+};
+
+const kanjiData: Kanji[] = [
+  {
+    kanji: '日',
+    meaning_en: 'Day, Sun',
+    meaning_ta: 'நாள், சூரியன்',
+    onyomi: 'ニチ、ジツ',
+    kunyomi: 'ひ、-か',
+    strokes: 4,
+    examples: ['日本 (Japan)', '日曜日 (Sunday)', '毎日 (every day)'],
+    level: 'N5',
+  },
+  {
+    kanji: '本',
+    meaning_en: 'Book, Origin',
+    meaning_ta: 'புத்தகம், தோற்றம்',
+    onyomi: 'ホン',
+    kunyomi: 'もと',
+    strokes: 5,
+    examples: ['日本 (Japan)', '本 (book)', '本来 (originally)'],
+    level: 'N5',
+  },
+  {
+    kanji: '人',
+    meaning_en: 'Person',
+    meaning_ta: 'மனிதர்',
+    onyomi: 'ジン、ニン',
+    kunyomi: 'ひと',
+    strokes: 2,
+    examples: ['日本人 (Japanese person)', '三人 (three people)', 'この人 (this person)'],
+    level: 'N5',
+  },
+  {
+    kanji: '学',
+    meaning_en: 'Learn, Study',
+    meaning_ta: 'கற்றல்',
+    onyomi: 'ガク',
+    kunyomi: 'まなぶ',
+    strokes: 8,
+    examples: ['学校 (school)', '学生 (student)', '大学 (university)'],
+    level: 'N5',
+  },
+  {
+    kanji: '大',
+    meaning_en: 'Big, Large',
+    meaning_ta: 'பெரிய',
+    onyomi: 'ダイ、タイ',
+    kunyomi: 'おお-、おおきい',
+    strokes: 3,
+    examples: ['大丈夫 (okay)', '大学 (university)', '大きい (big)'],
+    level: 'N5',
+  },
+  {
+    kanji: '小',
+    meaning_en: 'Small',
+    meaning_ta: 'சிறிய',
+    onyomi: 'ショウ',
+    kunyomi: 'ちい-、こ-',
+    strokes: 3,
+    examples: ['小学校 (elementary school)', '小さい (small)', '小人 (small person)'],
+    level: 'N5',
+  },
+  {
+    kanji: '山',
+    meaning_en: 'Mountain',
+    meaning_ta: 'மலை',
+    onyomi: 'サン',
+    kunyomi: 'やま',
+    strokes: 3,
+    examples: ['富士山 (Mt. Fuji)', '山 (mountain)', '火山 (volcano)'],
+    level: 'N5',
+  },
+  {
+    kanji: '川',
+    meaning_en: 'River',
+    meaning_ta: 'ஆறு',
+    onyomi: 'セン',
+    kunyomi: 'かわ',
+    strokes: 3,
+    examples: ['川 (river)', '小川 (stream)', '河川 (rivers)'],
+    level: 'N5',
+  },
+  {
+    kanji: '語',
+    meaning_en: 'Language, Word',
+    meaning_ta: 'மொழி',
+    onyomi: 'ゴ',
+    kunyomi: 'かたる',
+    strokes: 14,
+    examples: ['日本語 (Japanese)', '英語 (English)', '言葉 (word)'],
+    level: 'N4',
+  },
+  {
+    kanji: '会',
+    meaning_en: 'Meet, Assembly',
+    meaning_ta: 'சந்திப்பு',
+    onyomi: 'カイ',
+    kunyomi: 'あう',
+    strokes: 6,
+    examples: ['会社 (company)', '会議 (meeting)', '会う (to meet)'],
+    level: 'N4',
+  },
 ];
 
 const levels = ['All', 'N5', 'N4', 'N3', 'N2'];
@@ -26,7 +129,13 @@ export default function KanjiPage() {
   const [selectedLevel, setSelectedLevel] = useState('All');
 
   const filtered = kanjiData.filter((item) => {
-    const matchesSearch = item.kanji.includes(search) || item.meaning_en.includes(search);
+    const q = search.toLowerCase();
+    const matchesSearch =
+      item.kanji.includes(search) ||
+      item.meaning_en.toLowerCase().includes(q) ||
+      item.meaning_ta.includes(search) ||
+      item.onyomi.toLowerCase().includes(q) ||
+      item.kunyomi.toLowerCase().includes(q);
     const matchesLevel = selectedLevel === 'All' || item.level === selectedLevel;
     return matchesSearch && matchesLevel;
   });
@@ -49,18 +158,37 @@ export default function KanjiPage() {
               <div className="h-14 w-14 bg-emerald-500 rounded-xl flex items-center justify-center">
                 <PenTool className="h-7 w-7 text-white" />
               </div>
-              <div><h1 className="text-3xl font-bold">Kanji Studies</h1><p className="text-muted-foreground">Master Japanese characters</p></div>
+              <div>
+                <h1 className="text-3xl font-bold">Kanji Studies</h1>
+                <p className="text-muted-foreground">Master Japanese characters with readings and examples</p>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input placeholder="Search..." className="pl-10" value={search} onChange={(e) => setSearch(e.target.value)} />
+                <Input
+                  placeholder="Search by kanji, meaning, or reading..."
+                  className="pl-10"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
               </div>
-              <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                <SelectTrigger className="w-[120px]"><SelectValue placeholder="Level" /></SelectTrigger>
-                <SelectContent>{levels.map((l) => <SelectItem key={l} value={l}>{l}</SelectItem>)}</SelectContent>
-              </Select>
+              <div className="flex flex-wrap gap-2">
+                {levels.map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setSelectedLevel(l)}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition ${
+                      selectedLevel === l
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground hover:bg-muted/70'
+                    }`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -77,17 +205,42 @@ export default function KanjiPage() {
                       <Badge variant="outline">{item.level}</Badge>
                     </div>
                     <div className="space-y-2">
-                      <div><p className="text-xs text-muted-foreground">音読み</p><p className="font-medium">{item.onyomi}</p></div>
-                      <div><p className="text-xs text-muted-foreground">訓読み</p><p className="font-medium">{item.kunyomi}</p></div>
-                      <div className="pt-2 border-t"><p className="font-medium">{item.meaning_en}</p><p className="text-sm text-muted-foreground">{item.meaning_ta}</p></div>
+                      <div>
+                        <p className="text-xs text-muted-foreground">音読み (Onyomi)</p>
+                        <p className="font-medium kanji-text">{item.onyomi}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-muted-foreground">訓読み (Kunyomi)</p>
+                        <p className="font-medium kanji-text">{item.kunyomi}</p>
+                      </div>
+                      <div className="pt-2 border-t">
+                        <p className="font-medium">{item.meaning_en}</p>
+                        <p className="text-sm text-muted-foreground">{item.meaning_ta}</p>
+                      </div>
                       <div className="flex items-center justify-between pt-2">
                         <Badge variant="secondary">{item.strokes} strokes</Badge>
+                      </div>
+                      <div className="pt-2">
+                        <p className="text-xs text-muted-foreground mb-1">Examples</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {item.examples.map((ex, j) => (
+                            <Badge key={j} variant="outline" className="text-xs">
+                              {ex}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
+
+            {filtered.length === 0 && (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground">No kanji found. Try a different search or level.</p>
+              </div>
+            )}
           </div>
         </section>
       </main>

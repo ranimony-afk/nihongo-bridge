@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter, Noto_Serif_JP } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from '@/components/ui/toaster';
+import { GoogleAnalytics } from '@/components/Analytics';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,14 +18,16 @@ const notoSerifJP = Noto_Serif_JP({
   display: 'swap',
 });
 
+const siteUrl = 'https://nihongobridge.com';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://japanbridgetamil.com'),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'Japan Bridge Tamil - Learn Japanese, Study in Japan, Work with Japan',
-    template: '%s | Japan Bridge Tamil',
+    default: 'Nihongo Bridge - Learn Japanese, Study in Japan, Build Your Career',
+    template: '%s | Nihongo Bridge',
   },
   description:
-    'Your bridge to Japan. Learn Japanese language, prepare for JLPT, discover study abroad opportunities, and explore career paths in Japan. Resources in Tamil, English, and Japanese.',
+    'Master Japanese, prepare for JLPT, explore Japanese culture, and build your future in Japan. Structured multilingual lessons, study abroad guides, and career resources.',
   keywords: [
     'Japanese language learning',
     'JLPT preparation',
@@ -33,13 +36,13 @@ export const metadata: Metadata = {
     'Japanese vocabulary',
     'Kanji lessons',
     'Japanese culture',
-    'Tamil',
-    'India to Japan',
     'Japanese grammar',
+    'Japanese jobs',
+    'Nihongo Bridge',
   ],
-  authors: [{ name: 'Japan Bridge Tamil Team' }],
-  creator: 'Japan Bridge Tamil',
-  publisher: 'Japan Bridge Tamil',
+  authors: [{ name: 'Nihongo Bridge' }],
+  creator: 'Nihongo Bridge',
+  publisher: 'Nihongo Bridge',
   robots: {
     index: true,
     follow: true,
@@ -54,28 +57,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://japanbridgetamil.com',
-    siteName: 'Japan Bridge Tamil',
-    title: 'Japan Bridge Tamil - Learn Japanese, Study in Japan, Work with Japan',
+    url: siteUrl,
+    siteName: 'Nihongo Bridge',
+    title: 'Nihongo Bridge - Learn Japanese, Study in Japan, Build Your Career',
     description:
-      'Your bridge to Japan. Learn Japanese language, prepare for JLPT, discover study abroad opportunities, and explore career paths in Japan.',
+      'Master Japanese, prepare for JLPT, explore Japanese culture, and build your future in Japan.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Japan Bridge Tamil',
+        alt: 'Nihongo Bridge',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Japan Bridge Tamil',
-    description: 'Your bridge to Japan. Learn Japanese, Study in Japan, Work with Japan.',
+    title: 'Nihongo Bridge',
+    description: 'Learn Japanese • Study in Japan • Build Your Career',
     images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: 'https://japanbridgetamil.com',
+    canonical: siteUrl,
   },
 };
 
@@ -105,6 +108,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </ThemeProvider>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
     </html>
   );

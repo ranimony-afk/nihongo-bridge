@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -10,88 +11,59 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
-  Menu,
-  Sun,
-  Moon,
-  Globe,
-  ChevronDown,
-  BookOpen,
-  GraduationCap,
-  Briefcase,
-  FileText,
-  Mail,
-} from 'lucide-react';
-
-const navigation = [
-  { name: 'Home', href: '/' },
-  {
-    name: 'Japanese Learning',
-    href: '/learn',
-    children: [
-      { name: 'Vocabulary', href: '/learn/vocabulary', icon: BookOpen },
-      { name: 'Grammar', href: '/learn/grammar', icon: FileText },
-      { name: 'Kanji', href: '/learn/kanji', icon: BookOpen },
-    ],
-  },
-  {
-    name: 'JLPT',
-    href: '/jlpt',
-    children: [
-      { name: 'JLPT N5', href: '/jlpt/n5', icon: GraduationCap },
-      { name: 'JLPT N4', href: '/jlpt/n4', icon: GraduationCap },
-      { name: 'JLPT N3', href: '/jlpt/n3', icon: GraduationCap },
-      { name: 'JLPT N2', href: '/jlpt/n2', icon: GraduationCap },
-    ],
-  },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Study in Japan', href: '/study-in-japan' },
-  { name: 'Careers', href: '/careers' },
-  { name: 'Resources', href: '/resources' },
-];
-
-const languages = [
-  { code: 'en', name: 'English' },
-  { code: 'ta', name: 'தமிழ்' },
-  { code: 'ja', name: '日本語' },
-];
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
+import { Menu, Sun, Moon, ChevronDown } from 'lucide-react';
+import { navLinks } from '@/lib/data';
 
 export default function Header() {
+  const [mounted, setMounted] = useState(false);
+  const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => setMounted(true), []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold tracking-tight">
-              <span className="text-primary">日本</span>
-              <span className="text-foreground"> Bridge</span>
-            </span>
-            <span className="ml-2 hidden sm:inline text-sm font-medium text-muted-foreground">
-              Tamil
-            </span>
+          <Link href="/" className="flex items-center space-x-2 flex-shrink-0">
+            <span className="text-2xl font-bold kanji-text text-primary">日本語</span>
+            <span className="text-lg font-bold text-foreground hidden sm:inline">Bridge</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-1">
-            {navigation.map((item) =>
-              item.children ? (
-                <DropdownMenu key={item.name}>
+          <nav className="hidden lg:flex items-center space-x-1">
+            {navLinks.map((link) =>
+              link.children ? (
+                <DropdownMenu key={link.name}>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center space-x-1">
-                      <span>{item.name}</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </Button>
+                    <button
+                      className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent hover:text-accent-foreground flex items-center space-x-0.5 ${
+                        pathname.startsWith(link.href) ? 'text-primary' : 'text-foreground/70'
+                      }`}
+                    >
+                      {link.name}
+                      <ChevronDown className="h-3.5 w-3.5" />
+                    </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-48">
-                    {item.children.map((child) => (
+                  <DropdownMenuContent align="start" className="w-56">
+                    <DropdownMenuItem asChild>
+                      <Link href={link.href} className="font-semibold text-primary">
+                        {link.name} Overview
+                      </Link>
+                    </DropdownMenuItem>
+                    {link.children.map((child) => (
                       <DropdownMenuItem key={child.name} asChild>
                         <Link href={child.href} className="flex items-center space-x-2">
-                          {child.icon && <child.icon className="h-4 w-4 text-primary" />}
+                          {child.icon && <child.icon className="h-4 w-4 text-muted-foreground" />}
                           <span>{child.name}</span>
                         </Link>
                       </DropdownMenuItem>
@@ -100,95 +72,95 @@ export default function Header() {
                 </DropdownMenu>
               ) : (
                 <Link
-                  key={item.name}
-                  href={item.href}
-                  className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  key={link.name}
+                  href={link.href}
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-accent hover:text-accent-foreground ${
+                    pathname === link.href ? 'text-primary' : 'text-foreground/70'
+                  }`}
                 >
-                  {item.name}
+                  {link.name}
                 </Link>
               )
             )}
-          </div>
+          </nav>
 
-          {/* Right side actions */}
+          {/* Right side */}
           <div className="flex items-center space-x-2">
-            {/* Language Switcher */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Globe className="h-5 w-5" />
-                  <span className="sr-only">Switch language</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {languages.map((lang) => (
-                  <DropdownMenuItem key={lang.code}>
-                    <span className="mr-2">{lang.name}</span>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Theme Toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
+            {mounted && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="h-9 w-9"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="h-5 w-5 transition-all rotate-0 scale-100" />
+                ) : (
+                  <Moon className="h-5 w-5 transition-all rotate-0 scale-100" />
+                )}
+              </Button>
+            )}
+            <Button asChild size="sm" className="hidden sm:inline-flex">
+              <Link href="/learn">Start Learning</Link>
             </Button>
 
-            {/* Contact Button */}
-            <Link href="/contact">
-              <Button variant="default" size="sm" className="hidden sm:flex">
-                <Mail className="mr-2 h-4 w-4" />
-                Contact
-              </Button>
-            </Link>
-
-            {/* Mobile Menu */}
-            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-              <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon">
+            {/* Mobile menu */}
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9" aria-label="Open menu">
                   <Menu className="h-5 w-5" />
-                  <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80">
-                <div className="flex flex-col space-y-4 mt-8">
-                  {navigation.map((item) => (
-                    <div key={item.name}>
+              <SheetContent side="right" className="w-80 overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle className="text-left">
+                    <span className="text-2xl font-bold kanji-text text-primary">日本語</span>
+                    <span className="text-lg font-bold text-foreground ml-1">Bridge</span>
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="mt-6 flex flex-col space-y-1">
+                  {navLinks.map((link) =>
+                    link.children ? (
+                      <div key={link.name} className="space-y-1">
+                        <Link
+                          href={link.href}
+                          className="block px-3 py-2 text-sm font-semibold text-foreground hover:bg-accent rounded-md"
+                          onClick={() => setOpen(false)}
+                        >
+                          {link.name}
+                        </Link>
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className="flex items-center space-x-2 pl-6 pr-3 py-1.5 text-sm text-muted-foreground hover:bg-accent rounded-md"
+                            onClick={() => setOpen(false)}
+                          >
+                            {child.icon && <child.icon className="h-4 w-4" />}
+                            <span>{child.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
                       <Link
-                        href={item.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="text-lg font-medium hover:text-primary transition-colors"
+                        key={link.name}
+                        href={link.href}
+                        className={`block px-3 py-2 text-sm font-medium rounded-md hover:bg-accent ${
+                          pathname === link.href ? 'text-primary bg-primary/5' : 'text-foreground'
+                        }`}
+                        onClick={() => setOpen(false)}
                       >
-                        {item.name}
+                        {link.name}
                       </Link>
-                      {item.children && (
-                        <div className="mt-2 ml-4 flex flex-col space-y-2">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.name}
-                              href={child.href}
-                              onClick={() => setMobileOpen(false)}
-                              className="text-sm text-muted-foreground hover:text-primary"
-                            >
-                              {child.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                    )
+                  )}
+                </nav>
               </SheetContent>
             </Sheet>
           </div>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

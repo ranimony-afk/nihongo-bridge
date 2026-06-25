@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Header, Footer } from '@/components/layout';
+import { OrganizationSchema, WebSiteSchema } from '@/components/Schema';
 import {
   BookOpen,
   GraduationCap,
@@ -19,18 +20,40 @@ import {
   FileText,
   Layers,
   PenTool,
+  Volume2,
+  Building2,
+  Home,
+  Wallet,
+  Languages,
+  Code2,
+  Stethoscope,
+  Cherry,
+  Calendar,
+  UtensilsCrossed,
 } from 'lucide-react';
+import {
+  dailyVocabulary,
+  jlptLevels,
+  studyInJapanTopics,
+  careerCategories,
+  cultureTopics,
+  stats,
+  testimonials,
+  blogPosts,
+} from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Japan Bridge Tamil - Learn Japanese, Study in Japan, Work with Japan',
-  description: 'Your bridge to Japan. Learn Japanese language, prepare for JLPT, discover study abroad opportunities, and explore career paths in Japan.',
+  title: 'Nihongo Bridge - Learn Japanese, Study in Japan, Build Your Career',
+  description:
+    'Your gateway to Japanese language and opportunities. Master Japanese, prepare for JLPT, explore Japanese culture, and build your future in Japan.',
+  alternates: { canonical: '/' },
 };
 
 const features = [
   {
     icon: BookOpen,
     title: 'Learn Japanese',
-    description: 'Master Japanese vocabulary, grammar, and kanji with structured lessons designed for Indian learners.',
+    description: 'Master Japanese vocabulary, grammar, and kanji with structured lessons designed for all learners.',
     href: '/learn',
     color: 'text-red-500',
   },
@@ -57,68 +80,13 @@ const features = [
   },
 ];
 
-const jlptLevels = [
-  { level: 'N5', title: 'Beginner', desc: 'Basic grammar & vocabulary', count: '150+ lessons' },
-  { level: 'N4', title: 'Elementary', desc: 'Daily conversation skills', count: '200+ lessons' },
-  { level: 'N3', title: 'Intermediate', desc: 'Natural communication', count: '250+ lessons' },
-  { level: 'N2', title: 'Pre-Advanced', desc: 'Business Japanese', count: '300+ lessons' },
-];
-
-const featuredPosts = [
-  {
-    title: 'How to Get MEXT Scholarship: Complete Guide',
-    excerpt: 'A detailed guide on applying for the MEXT scholarship program from India.',
-    category: 'Study in Japan',
-    readTime: '12 min',
-    image: 'https://images.pexels.com/photos/2175829/pexels-photo-2175829.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    title: 'JLPT N5 Grammar: Complete Study Guide',
-    excerpt: 'Master all grammar points required for the JLPT N5 examination.',
-    category: 'JLPT N5',
-    readTime: '15 min',
-    image: 'https://images.pexels.com/photos/3825585/pexels-photo-3825585.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    title: 'Japanese Work Culture: What Indians Should Know',
-    excerpt: 'Important cultural differences and tips for working in Japanese companies.',
-    category: 'Career',
-    readTime: '10 min',
-    image: 'https://images.pexels.com/photos/2182980/pexels-photo-2182980.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-];
-
-const stats = [
-  { value: '10,000+', label: 'Students Helped' },
-  { value: '500+', label: 'Japanese Lessons' },
-  { value: '50+', label: 'Countries Reached' },
-  { value: '98%', label: 'Success Rate' },
-];
-
-const testimonials = [
-  {
-    name: 'Student from Chennai',
-    location: 'Chennai',
-    text: 'This platform helped me clear JLPT N4 and now I work as a Japanese interpreter in Tokyo!',
-    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150',
-  },
-  {
-    name: 'Engineering Graduate',
-    location: 'Madurai',
-    text: 'The study materials and scholarship guide helped me get into a top Japanese university.',
-    avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150',
-  },
-  {
-    name: 'Language Enthusiast',
-    location: 'Coimbatore',
-    text: 'Learning Japanese through Tamil explanations made everything so much easier to understand.',
-    avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150',
-  },
-];
-
 export default function HomePage() {
+  const featuredPosts = blogPosts.filter((p) => p.featured).slice(0, 3);
+
   return (
     <>
+      <OrganizationSchema />
+      <WebSiteSchema />
       <Header />
       <main>
         {/* Hero Section */}
@@ -136,31 +104,31 @@ export default function HomePage() {
                 </Badge>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-                  Learn Japanese,{' '}
+                  Your Gateway to{' '}
                   <span className="text-primary">
-                    Study in Japan,{' '}
-                  </span>
-                  Work with Japan
+                    Japanese Language
+                  </span>{' '}
+                  and Opportunities
                 </h1>
 
                 <p className="text-xl text-muted-foreground mb-8 max-w-lg">
-                  Your bridge to mastering Japanese language, qualifying JLPT, and building a
-                  successful career connecting India and Japan.
+                  Master Japanese, prepare for JLPT, explore Japanese culture, and build your future
+                  in Japan.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" asChild className="text-base">
                     <Link href="/learn">
-                      Start Learning Free
+                      Start Learning
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
-                    <Link href="/about">About Us</Link>
+                    <Link href="/jlpt">Explore JLPT</Link>
                   </Button>
                 </div>
 
-                <div className="mt-12 flex items-center space-x-8">
+                <div className="mt-12 flex flex-wrap items-center gap-8">
                   {stats.map((stat) => (
                     <div key={stat.label}>
                       <p className="text-2xl font-bold text-primary">{stat.value}</p>
@@ -179,17 +147,16 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-                  {/* Floating Card */}
                   <div className="absolute bottom-6 left-6 right-6">
                     <div className="bg-white/95 dark:bg-black/80 backdrop-blur rounded-xl p-4 shadow-xl">
                       <div className="flex items-center space-x-3">
                         <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <span className="text-2xl">🌉</span>
+                          <span className="text-2xl kanji-text text-primary">日</span>
                         </div>
                         <div>
-                          <p className="font-semibold text-foreground">日本 Bridge Tamil</p>
+                          <p className="font-semibold text-foreground">Nihongo Bridge</p>
                           <p className="text-sm text-muted-foreground">
-                            India-Japan Cultural Bridge
+                            Learn Japanese • Study in Japan
                           </p>
                         </div>
                       </div>
@@ -243,8 +210,52 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* JLPT Levels Section */}
+        {/* Daily Vocabulary Section */}
         <section className="py-20 lg:py-28 bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4">
+                Daily Vocabulary
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Learn a New Word Every Day
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Essential Japanese words with furigana, meanings, and example sentences.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {dailyVocabulary.map((word, i) => (
+                <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="pt-6 text-center">
+                    <div className="mb-3">
+                      <ruby className="kanji-text text-3xl font-bold text-primary">
+                        {word.japanese}
+                        <rt className="text-sm text-muted-foreground font-normal">{word.furigana}</rt>
+                      </ruby>
+                    </div>
+                    <p className="font-semibold mb-2">{word.english}</p>
+                    <p className="text-xs text-muted-foreground italic mb-3">{word.example}</p>
+                    <p className="text-xs text-muted-foreground">{word.exampleEn}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Button variant="outline" asChild>
+                <Link href="/learn/vocabulary">
+                  View All Vocabulary
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* JLPT Preparation Section */}
+        <section className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -260,20 +271,20 @@ export default function HomePage() {
                 </p>
 
                 <div className="space-y-4">
-                  {jlptLevels.map((item) => (
+                  {jlptLevels.slice(0, 3).map((item) => (
                     <Link
                       key={item.level}
-                      href={`/jlpt/${item.level.toLowerCase()}`}
-                      className="flex items-center p-4 rounded-lg bg-background border hover:border-primary hover:shadow-md transition-all group"
+                      href={item.href}
+                      className="flex items-center p-4 rounded-lg bg-muted/30 border hover:border-primary hover:shadow-md transition-all group"
                     >
-                      <div className="h-14 w-14 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-lg mr-4">
+                      <div className={`h-14 w-14 rounded-lg bg-gradient-to-br ${item.color} text-white flex items-center justify-center font-bold text-lg mr-4`}>
                         {item.level}
                       </div>
                       <div className="flex-1">
                         <p className="font-semibold">{item.title}</p>
                         <p className="text-sm text-muted-foreground">{item.desc}</p>
                       </div>
-                      <div className="text-sm text-primary font-medium hidden sm:block">
+                      <div className="text-sm text-primary font-medium hidden sm:block mr-4">
                         {item.count}
                       </div>
                       <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -302,120 +313,140 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Learning Portal Preview */}
+        {/* Study in Japan Section */}
+        <section className="py-20 lg:py-28 bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4">
+                Study in Japan
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Your Guide to Studying in Japan
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Everything you need to know about visas, schools, scholarships, and living in Japan.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {studyInJapanTopics.map((topic, i) => (
+                <Link key={i} href={topic.href}>
+                  <Card className="h-full group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <CardHeader>
+                      <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <topic.icon className="h-6 w-6 text-primary group-hover:text-white" />
+                      </div>
+                      <CardTitle className="text-lg">{topic.title}</CardTitle>
+                      <CardDescription className="mt-2">{topic.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <span className="text-sm text-primary font-medium">{topic.count}</span>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Button variant="outline" asChild>
+                <Link href="/study-in-japan">
+                  Explore Study Options
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Careers in Japan Section */}
         <section className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4">
-                Learning Portal
+                Careers in Japan
               </Badge>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Learn Japanese Your Way
+                Build Your Career in Japan
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Interactive lessons with vocabulary, grammar, kanji, and more - all explained in Tamil and English.
+                Explore job opportunities, interview preparation, and career guidance for working in Japan.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="overflow-hidden group">
-                <div className="aspect-video relative overflow-hidden">
-                  <img
-                    src="https://images.pexels.com/photos/6995098/pexels-photo-6995098.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Japanese vocabulary"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <Badge className="bg-primary">500+ Words</Badge>
-                  </div>
-                </div>
-                <CardHeader>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <BookOpen className="h-5 w-5 text-primary" />
-                    <CardTitle>Vocabulary</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Daily Japanese words with furigana, meanings in Tamil & English, and example sentences.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link href="/learn/vocabulary">
-                      Start Learning
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {careerCategories.map((career, i) => (
+                <Link key={i} href={career.href}>
+                  <Card className="h-full group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <CardHeader>
+                      <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <career.icon className="h-6 w-6 text-primary group-hover:text-white" />
+                      </div>
+                      <CardTitle className="text-lg">{career.title}</CardTitle>
+                      <CardDescription className="mt-2">{career.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm font-medium text-primary">{career.salary}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
 
-              <Card className="overflow-hidden group">
-                <div className="aspect-video relative overflow-hidden">
-                  <img
-                    src="https://images.pexels.com/photos/7084942/pexels-photo-7084942.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Japanese kanji"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <Badge className="bg-primary">200+ Kanji</Badge>
-                  </div>
-                </div>
-                <CardHeader>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <PenTool className="h-5 w-5 text-primary" />
-                    <CardTitle>Kanji</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Master kanji with stroke order animations, readings, meanings, and practical examples.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link href="/learn/kanji">
-                      Start Learning
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+            <div className="text-center mt-8">
+              <Button variant="outline" asChild>
+                <Link href="/careers">
+                  Explore Career Options
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
 
-              <Card className="overflow-hidden group">
-                <div className="aspect-video relative overflow-hidden">
-                  <img
-                    src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Japanese grammar"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <Badge className="bg-primary">100+ Lessons</Badge>
-                  </div>
-                </div>
-                <CardHeader>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Layers className="h-5 w-5 text-primary" />
-                    <CardTitle>Grammar</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Clear grammar explanations with examples and practice exercises for all levels.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link href="/learn/grammar">
-                      Start Learning
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+        {/* Japanese Culture Section */}
+        <section className="py-20 lg:py-28 bg-muted/30">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4">
+                Japanese Culture
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Explore Japanese Culture
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Discover the traditions, customs, and daily life that make Japan unique.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cultureTopics.map((topic, i) => (
+                <Link key={i} href={topic.href}>
+                  <Card className="h-full group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <CardHeader>
+                      <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <topic.icon className="h-6 w-6 text-primary group-hover:text-white" />
+                      </div>
+                      <CardTitle className="text-lg">{topic.title}</CardTitle>
+                      <CardDescription className="mt-2">{topic.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Button variant="outline" asChild>
+                <Link href="/culture">
+                  Discover Japanese Culture
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
 
         {/* Featured Blog Posts */}
-        <section className="py-20 lg:py-28 bg-muted/30">
+        <section className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-end mb-12">
               <div>
@@ -435,8 +466,8 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {featuredPosts.map((post, index) => (
-                <Link key={index} href={`/blog/${post.title.toLowerCase().replace(/\s+/g, '-')}`}>
+              {featuredPosts.map((post) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`}>
                   <Card className="h-full overflow-hidden group hover:shadow-lg transition-all">
                     <div className="aspect-video relative overflow-hidden">
                       <img
@@ -477,7 +508,7 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 lg:py-28 bg-background">
+        <section className="py-20 lg:py-28 bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4">
@@ -521,81 +552,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* About Section */}
-        <section className="py-20 lg:py-28 bg-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="order-2 lg:order-1">
-                <Badge variant="outline" className="mb-4">
-                  About Us
-                </Badge>
-                <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                  Japan Bridge Tamil Team
-                </h2>
-                <p className="text-lg text-muted-foreground mb-6">
-                  A team of Japanese language enthusiasts and engineers bridging the gap between
-                  India and Japan through education and cultural exchange.
-                </p>
-
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <GraduationCap className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Engineering Background</p>
-                      <p className="text-sm text-muted-foreground">
-                        Technical expertise combined with Japanese language skills
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Globe className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Experience in Tokyo, Japan</p>
-                      <p className="text-sm text-muted-foreground">
-                        Immersive Japanese language and cultural education
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Users className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Multilingual Communication</p>
-                      <p className="text-sm text-muted-foreground">
-                        English, Tamil, Malayalam, and Japanese fluency
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <Button className="mt-8" asChild>
-                  <Link href="/about">
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="order-1 lg:order-2 relative">
-                <img
-                  src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Japan Bridge Tamil Team"
-                  className="rounded-2xl shadow-xl"
-                />
-                <div className="absolute -bottom-4 -right-4 bg-white dark:bg-black rounded-xl p-4 shadow-lg border hidden sm:block">
-                  <p className="text-3xl font-bold text-primary">4+</p>
-                  <p className="text-sm text-muted-foreground">Languages</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Newsletter Section */}
         <section id="newsletter" className="py-20 lg:py-28 japan-gradient text-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -612,6 +568,7 @@ export default function HomePage() {
                   type="email"
                   placeholder="Enter your email"
                   className="bg-white/10 border-white/20 placeholder:text-white/60 text-white"
+                  aria-label="Email address"
                 />
                 <Button size="lg" variant="secondary" className="sm:w-auto w-full">
                   Subscribe Free

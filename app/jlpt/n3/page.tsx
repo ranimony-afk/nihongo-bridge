@@ -23,94 +23,102 @@ import {
 } from 'lucide-react';
 
 const vocabulary = [
-  { word: '勉強', furigana: 'べんきょう', romaji: 'benkyou', meaning: 'Study' },
-  { word: '仕事', furigana: 'しごと', romaji: 'shigoto', meaning: 'Work / Job' },
-  { word: '電車', furigana: 'でんしゃ', romaji: 'densha', meaning: 'Train' },
-  { word: '天気', furigana: 'てんき', romaji: 'tenki', meaning: 'Weather' },
-  { word: '病院', furigana: 'びょういん', romaji: 'byouin', meaning: 'Hospital' },
-  { word: '料理', furigana: 'りょうり', romaji: 'ryouri', meaning: 'Cooking / Cuisine' },
-  { word: '約束', furigana: 'やくそく', romaji: 'yakusoku', meaning: 'Promise / Appointment' },
-  { word: '経験', furigana: 'けいけん', romaji: 'keiken', meaning: 'Experience' },
-  { word: '予定', furigana: 'よてい', romaji: 'yotei', meaning: 'Plan / Schedule' },
-  { word: '説明', furigana: 'せつめい', romaji: 'setsumei', meaning: 'Explanation' },
+  { word: '環境', furigana: 'かんきょう', romaji: 'kankyou', meaning: 'Environment' },
+  { word: '経済', furigana: 'けいざい', romaji: 'keizai', meaning: 'Economy' },
+  { word: '技術', furigana: 'ぎじゅつ', romaji: 'gijutsu', meaning: 'Technology / Technique' },
+  { word: '文化', furigana: 'ぶんか', romaji: 'bunka', meaning: 'Culture' },
+  { word: '社会', furigana: 'しゃかい', romaji: 'shakai', meaning: 'Society' },
+  { word: '教育', furigana: 'きょういく', romaji: 'kyouiku', meaning: 'Education' },
+  { word: '健康', furigana: 'けんこう', romaji: 'kenkou', meaning: 'Health' },
+  { word: '開発', furigana: 'かいはつ', romaji: 'kaihatsu', meaning: 'Development' },
+  { word: '責任', furigana: 'せきにん', romaji: 'sekinin', meaning: 'Responsibility' },
+  { word: '機会', furigana: 'きかい', romaji: 'kikai', meaning: 'Opportunity' },
 ];
 
 const grammarPoints = [
   {
-    name: '〜てある',
-    meaning: 'State resulting from an action',
-    explanation: 'Describes a state that exists as a result of someone&apos;s intentional action.',
+    name: '〜ばかりでなく',
+    meaning: 'Not only... but also',
+    explanation:
+      'Used to emphasize that something applies not just to one thing, but to additional things as well.',
     examples: [
-      { jp: '壁にポスターが貼ってある。', en: 'A poster is put up on the wall.' },
-      { jp: 'テーブルにお皿が並べてある。', en: 'Dishes are arranged on the table.' },
+      { jp: '彼は英語ばかりでなく、フランス語も話せる。', en: 'He can speak not only English but also French.' },
+      { jp: 'この店は安いばかりでなく、品物もいい。', en: 'This shop is not only cheap but also has good products.' },
     ],
   },
   {
-    name: '〜ことにする',
-    meaning: 'To decide to do',
-    explanation: 'Expresses a personal decision to do (or not do) something.',
-    examples: [
-      { jp: '明日から日本語を勉強することにした。', en: 'I decided to study Japanese from tomorrow.' },
-      { jp: '甘いものを食べないことにしている。', en: 'I make it a rule not to eat sweets.' },
-    ],
-  },
-  {
-    name: '〜ようと思う',
+    name: '〜つもりだ',
     meaning: 'To intend to',
-    explanation: 'Expresses the speaker&apos;s intention or plan to do something.',
+    explanation:
+      'Expresses a strong intention or plan to do something. More assertive than 〜ようと思う.',
     examples: [
-      { jp: '来年日本へ行こうと思っている。', en: 'I am thinking of going to Japan next year.' },
-      { jp: '新しい仕事を始めようと思う。', en: 'I intend to start a new job.' },
+      { jp: '来年、日本に留学するつもりだ。', en: 'I intend to study abroad in Japan next year.' },
+      { jp: '週末は家で勉強するつもりです。', en: 'I plan to study at home this weekend.' },
     ],
   },
   {
-    name: '〜かもしれない',
-    meaning: 'Might / Maybe',
-    explanation: 'Indicates possibility — something may or may not happen.',
+    name: '〜はずだ',
+    meaning: 'Should be / Supposed to',
+    explanation:
+      'Indicates a strong expectation based on logic, common sense, or prior information.',
     examples: [
-      { jp: '明日は雨が降るかもしれない。', en: 'It might rain tomorrow.' },
-      { jp: '彼は来ないかもしれない。', en: 'He might not come.' },
+      { jp: '彼はもう着いているはずだ。', en: 'He should have arrived by now.' },
+      { jp: 'この薬を飲めば、すぐよくなるはずです。', en: 'If you take this medicine, you should feel better soon.' },
     ],
   },
   {
-    name: '〜と',
-    meaning: 'If / When',
-    explanation: 'Expresses a natural or habitual consequence — when A happens, B happens.',
+    name: '〜ようにする',
+    meaning: 'To make sure to / Try to',
+    explanation:
+      'Expresses an effort or habit — making a conscious effort to do (or not do) something.',
     examples: [
-      { jp: '春になると、花が咲く。', en: 'When spring comes, flowers bloom.' },
-      { jp: '右に曲がると、駅がある。', en: 'If you turn right, there is a station.' },
+      { jp: '毎日、日本語を話すようにしている。', en: 'I make sure to speak Japanese every day.' },
+      { jp: '遅刻しないようにしてください。', en: 'Please make sure not to be late.' },
     ],
   },
   {
-    name: '〜ながら',
-    meaning: 'While doing',
-    explanation: 'Indicates doing two actions simultaneously — doing A while doing B.',
+    name: '〜によって',
+    meaning: 'Depending on / By means of',
+    explanation:
+      'Indicates the cause, means, or agent of an action. Also used to show variation depending on something.',
     examples: [
-      { jp: '音楽を聞きながら勉強する。', en: 'I study while listening to music.' },
-      { jp: 'テレビを見ながらご飯を食べる。', en: 'I eat while watching TV.' },
+      { jp: '国によって文化が違う。', en: 'Culture differs depending on the country.' },
+      { jp: 'この問題は先生によって解決された。', en: 'This problem was solved by the teacher.' },
+    ],
+  },
+  {
+    name: '〜に対して',
+    meaning: 'Towards / Against / In contrast to',
+    explanation:
+      'Expresses an attitude or action directed at someone or something, or a contrast between two things.',
+    examples: [
+      { jp: '彼の発言に対して抗議した。', en: 'I protested against his remark.' },
+      { jp: '姉に対して、弟はとても背が高い。', en: 'In contrast to his sister, the brother is very tall.' },
     ],
   },
 ];
 
 const studyPlan = [
-  { week: 1, focus: 'Review N5 & Transition', hours: 10, details: 'Solidify N5 grammar and vocabulary before moving forward.' },
-  { week: 2, focus: 'N4 Vocabulary (Part 1)', hours: 12, details: 'Learn 500 new words grouped by theme (daily life, work).' },
-  { week: 3, focus: 'N4 Vocabulary (Part 2)', hours: 12, details: 'Continue with 500 more words and start kanji practice.' },
-  { week: 4, focus: 'N4 Kanji (100 characters)', hours: 10, details: 'Learn 100 new kanji with their readings and common compounds.' },
-  { week: 5, focus: 'Grammar: て-form & Conditionals', hours: 12, details: 'Master 〜てある, 〜と, 〜たら, and 〜ば patterns.' },
-  { week: 6, focus: 'Grammar: Intentions & Modality', hours: 12, details: 'Study 〜ことにする, 〜ようと思う, 〜かもしれない.' },
-  { week: 7, focus: 'Reading & Listening Practice', hours: 10, details: 'Work through N4-level passages and audio exercises.' },
-  { week: 8, focus: 'Mock Exam & Review', hours: 12, details: 'Take a full practice test and review weak areas.' },
+  { week: 1, focus: 'Review N4 & Gap Filling', hours: 12, details: 'Identify and fill any gaps in your N4 knowledge before starting N3.' },
+  { week: 2, focus: 'N3 Vocabulary (Part 1)', hours: 15, details: 'Learn 750 new words focused on society, culture, and current events.' },
+  { week: 3, focus: 'N3 Vocabulary (Part 2)', hours: 15, details: 'Continue with 750 more words and begin themed kanji study.' },
+  { week: 4, focus: 'N3 Kanji (200 characters)', hours: 12, details: 'Learn 200 new kanji, focusing on readings and common compounds.' },
+  { week: 5, focus: 'Grammar: Complex Sentences', hours: 15, details: 'Master 〜ばかりでなく, 〜はずだ, 〜つもりだ, and related patterns.' },
+  { week: 6, focus: 'Grammar: Expressions & Nuance', hours: 15, details: 'Study 〜ようにする, 〜によって, 〜に対して, and modal expressions.' },
+  { week: 7, focus: 'Reading Comprehension', hours: 12, details: 'Practice reading N3-level passages, articles, and essays.' },
+  { week: 8, focus: 'Listening & Shadowing', hours: 12, details: 'Train your ear with N3 audio and practice shadowing native speech.' },
+  { week: 9, focus: 'Mock Exam (Part 1)', hours: 15, details: 'Take a half-length practice test and analyze your results.' },
+  { week: 10, focus: 'Mock Exam (Part 2) & Review', hours: 15, details: 'Full-length mock exam, targeted review, and final preparation.' },
 ];
 
 const stats = [
-  { icon: BookOpen, value: '1,500', label: 'Vocabulary' },
-  { icon: PenTool, value: '300', label: 'Kanji' },
-  { icon: FileText, value: '80', label: 'Grammar' },
-  { icon: Clock, value: '10-12', label: 'Weekly Hours' },
+  { icon: BookOpen, value: '3,000', label: 'Vocabulary' },
+  { icon: PenTool, value: '650', label: 'Kanji' },
+  { icon: FileText, value: '120', label: 'Grammar' },
+  { icon: Clock, value: '12-15', label: 'Weekly Hours' },
 ];
 
-export default function N4Page() {
+export default function N3Page() {
   const [selectedTab, setSelectedTab] = useState('overview');
 
   return (
@@ -118,7 +126,7 @@ export default function N4Page() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="bg-gradient-to-b from-blue-50 to-background py-12 lg:py-16 dark:from-blue-950/20">
+        <section className="bg-gradient-to-b from-amber-50 to-background py-12 lg:py-16 dark:from-amber-950/20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="mb-8 flex items-center space-x-2 text-sm">
               <Link href="/" className="text-muted-foreground hover:text-primary">
@@ -129,26 +137,26 @@ export default function N4Page() {
                 JLPT
               </Link>
               <ChevronRight className="h-4 w-4" />
-              <span className="font-medium">N4</span>
+              <span className="font-medium">N3</span>
             </nav>
 
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600">
-                <span className="text-3xl font-bold text-white">N4</span>
+              <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600">
+                <span className="text-3xl font-bold text-white">N3</span>
               </div>
               <div>
-                <Badge variant="outline" className="mb-2 border-blue-600 text-blue-600">
-                  Elementary Level
+                <Badge variant="outline" className="mb-2 border-amber-600 text-amber-600">
+                  Intermediate Level
                 </Badge>
-                <h1 className="text-3xl font-bold sm:text-4xl">JLPT N4 Preparation</h1>
-                <p className="text-muted-foreground">Everyday Japanese in 6–9 months</p>
+                <h1 className="text-3xl font-bold sm:text-4xl">JLPT N3 Preparation</h1>
+                <p className="text-muted-foreground">Natural Japanese in 9–12 months</p>
               </div>
             </div>
 
             <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
               {stats.map((stat) => (
                 <div key={stat.label} className="rounded-lg border bg-background p-4">
-                  <stat.icon className="mb-2 h-5 w-5 text-blue-600" />
+                  <stat.icon className="mb-2 h-5 w-5 text-amber-600" />
                   <p className="text-2xl font-bold">{stat.value}</p>
                   <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
@@ -174,31 +182,31 @@ export default function N4Page() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <BookOpen className="h-5 w-5 text-blue-600" />
-                        What is JLPT N4?
+                        <BookOpen className="h-5 w-5 text-amber-600" />
+                        What is JLPT N3?
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <p className="text-muted-foreground">
-                        JLPT N4 builds on N5 and tests your ability to understand basic Japanese in
-                        everyday situations. At this level, you can:
+                        JLPT N3 is the intermediate level — the bridge between basic and advanced
+                        Japanese. At this level, you can:
                       </p>
                       <ul className="space-y-2 text-muted-foreground">
                         <li className="flex items-start gap-2">
-                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-                          Hold simple daily conversations with native speakers
+                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+                          Understand Japanese in everyday situations to a reasonable degree
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-                          Read and understand basic texts on familiar topics
+                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+                          Read and comprehend general-topic materials with some effort
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-                          Comprehend everyday spoken Japanese at a natural pace
+                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+                          Follow the main points of spoken Japanese at near-natural speed
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-                          Express intentions, conditions, and simultaneous actions
+                          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+                          Express opinions, intentions, and nuanced ideas in conversation
                         </li>
                       </ul>
                     </CardContent>
@@ -207,7 +215,7 @@ export default function N4Page() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <Calendar className="h-5 w-5 text-blue-600" />
+                        <Calendar className="h-5 w-5 text-amber-600" />
                         Exam Details
                       </CardTitle>
                     </CardHeader>
@@ -218,11 +226,11 @@ export default function N4Page() {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Duration</span>
-                        <span className="font-medium">125 minutes</span>
+                        <span className="font-medium">155 minutes</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Pass Score</span>
-                        <span className="font-medium">90 / 180</span>
+                        <span className="font-medium">95 / 180</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Sections</span>
@@ -236,34 +244,34 @@ export default function N4Page() {
                   <Link href="/learn/vocabulary">
                     <Card className="h-full cursor-pointer transition hover:shadow-md">
                       <CardContent className="pt-6">
-                        <BookOpen className="mb-3 h-8 w-8 text-blue-600" />
+                        <BookOpen className="mb-3 h-8 w-8 text-amber-600" />
                         <h3 className="font-semibold">Vocabulary</h3>
-                        <p className="text-sm text-muted-foreground">1,500 words</p>
+                        <p className="text-sm text-muted-foreground">3,000 words</p>
                       </CardContent>
                     </Card>
                   </Link>
                   <Link href="/learn/kanji">
                     <Card className="h-full cursor-pointer transition hover:shadow-md">
                       <CardContent className="pt-6">
-                        <PenTool className="mb-3 h-8 w-8 text-blue-600" />
+                        <PenTool className="mb-3 h-8 w-8 text-amber-600" />
                         <h3 className="font-semibold">Kanji</h3>
-                        <p className="text-sm text-muted-foreground">300 characters</p>
+                        <p className="text-sm text-muted-foreground">650 characters</p>
                       </CardContent>
                     </Card>
                   </Link>
                   <Link href="/learn/grammar">
                     <Card className="h-full cursor-pointer transition hover:shadow-md">
                       <CardContent className="pt-6">
-                        <FileText className="mb-3 h-8 w-8 text-blue-600" />
+                        <FileText className="mb-3 h-8 w-8 text-amber-600" />
                         <h3 className="font-semibold">Grammar</h3>
-                        <p className="text-sm text-muted-foreground">Essential patterns</p>
+                        <p className="text-sm text-muted-foreground">Intermediate patterns</p>
                       </CardContent>
                     </Card>
                   </Link>
                   <Link href="/resources">
                     <Card className="h-full cursor-pointer transition hover:shadow-md">
                       <CardContent className="pt-6">
-                        <Headphones className="mb-3 h-8 w-8 text-blue-600" />
+                        <Headphones className="mb-3 h-8 w-8 text-amber-600" />
                         <h3 className="font-semibold">Listening</h3>
                         <p className="text-sm text-muted-foreground">Audio practice</p>
                       </CardContent>
@@ -275,16 +283,15 @@ export default function N4Page() {
               {/* Vocabulary */}
               <TabsContent value="vocabulary" className="space-y-6">
                 <div className="mb-4">
-                  <h2 className="text-2xl font-bold">Essential N4 Vocabulary</h2>
+                  <h2 className="text-2xl font-bold">Essential N3 Vocabulary</h2>
                   <p className="text-muted-foreground">
-                    These 10 words are commonly used in everyday Japanese. Learn them with furigana
-                    and meaning.
+                    These 10 words appear frequently in N3-level reading and listening materials.
                   </p>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {vocabulary.map((item, i) => (
                     <Card key={i} className="overflow-hidden">
-                      <div className="bg-gradient-to-r from-blue-500 to-cyan-600 px-4 py-3 text-white">
+                      <div className="bg-gradient-to-r from-amber-500 to-orange-600 px-4 py-3 text-white">
                         <p className="text-2xl font-bold">{item.word}</p>
                         <p className="text-sm opacity-90">{item.furigana}</p>
                       </div>
@@ -298,7 +305,7 @@ export default function N4Page() {
                 <div className="flex justify-center pt-4">
                   <Button asChild>
                     <Link href="/learn/vocabulary">
-                      View All N4 Vocabulary
+                      View All N3 Vocabulary
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
@@ -308,9 +315,10 @@ export default function N4Page() {
               {/* Grammar */}
               <TabsContent value="grammar" className="space-y-6">
                 <div className="mb-4">
-                  <h2 className="text-2xl font-bold">Essential N4 Grammar</h2>
+                  <h2 className="text-2xl font-bold">Essential N3 Grammar</h2>
                   <p className="text-muted-foreground">
-                    These 6 grammar points are key to expressing more nuanced ideas in Japanese.
+                    These 6 grammar points are essential for expressing complex ideas at the
+                    intermediate level.
                   </p>
                 </div>
                 <div className="grid gap-6 lg:grid-cols-2">
@@ -318,7 +326,7 @@ export default function N4Page() {
                     <Card key={i}>
                       <CardHeader>
                         <div className="flex items-center gap-2">
-                          <Badge className="bg-blue-600">{point.name}</Badge>
+                          <Badge className="bg-amber-600">{point.name}</Badge>
                         </div>
                         <CardTitle className="pt-2">{point.meaning}</CardTitle>
                         <CardDescription>{point.explanation}</CardDescription>
@@ -344,30 +352,30 @@ export default function N4Page() {
               {/* Study Plan */}
               <TabsContent value="plan" className="space-y-6">
                 <div className="mb-4">
-                  <h2 className="text-2xl font-bold">8-Week Study Plan</h2>
+                  <h2 className="text-2xl font-bold">10-Week Study Plan</h2>
                   <p className="text-muted-foreground">
-                    A comprehensive week-by-week plan to prepare for JLPT N4.
+                    A thorough week-by-week plan to prepare for JLPT N3.
                   </p>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   {studyPlan.map((week) => (
-                    <Card key={week.week} className="transition hover:border-blue-500">
+                    <Card key={week.week} className="transition hover:border-amber-500">
                       <CardHeader>
                         <div className="flex items-center justify-between">
                           <CardTitle className="flex items-center gap-2">
-                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-600 text-sm font-bold text-white">
                               {week.week}
                             </span>
                             Week {week.week}
                           </CardTitle>
-                          <Badge variant="outline" className="border-blue-600 text-blue-600">
+                          <Badge variant="outline" className="border-amber-600 text-amber-600">
                             <Clock className="mr-1 h-3 w-3" />
                             {week.hours} hrs
                           </Badge>
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="font-semibold text-blue-600">{week.focus}</p>
+                        <p className="font-semibold text-amber-600">{week.focus}</p>
                         <p className="mt-1 text-sm text-muted-foreground">{week.details}</p>
                       </CardContent>
                     </Card>
@@ -375,11 +383,12 @@ export default function N4Page() {
                 </div>
                 <Card className="bg-muted/30">
                   <CardContent className="flex items-start gap-3 pt-6">
-                    <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
+                    <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
                     <p className="text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">Tip:</span> Make sure you have
-                      a solid N5 foundation before starting N4. Many N4 grammar points build directly
-                      on N5 patterns. Review N5 material in week 1 if needed.
+                      <span className="font-semibold text-foreground">Tip:</span> At the N3 level,
+                      reading speed becomes critical. Practice timed reading exercises and try to
+                      understand the gist without looking up every word. Immersion through news,
+                      podcasts, and TV shows accelerates progress significantly.
                     </p>
                   </CardContent>
                 </Card>
@@ -391,17 +400,17 @@ export default function N4Page() {
         {/* CTA */}
         <section className="py-12 lg:py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <Card className="overflow-hidden border-0 bg-gradient-to-r from-blue-500 to-cyan-600 text-white">
+            <Card className="overflow-hidden border-0 bg-gradient-to-r from-amber-500 to-orange-600 text-white">
               <CardContent className="p-8 text-center lg:p-12">
                 <GraduationCap className="mx-auto mb-4 h-12 w-12 opacity-80" />
-                <h2 className="text-2xl font-bold sm:text-3xl">Ready to Level Up to N4?</h2>
+                <h2 className="text-2xl font-bold sm:text-3xl">Ready to Reach Intermediate?</h2>
                 <p className="mx-auto mt-3 max-w-xl opacity-90">
-                  Build on your N5 foundation and expand your everyday Japanese skills.
+                  N3 is your bridge to advanced Japanese. Start building real-world fluency today.
                 </p>
                 <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
                   <Button size="lg" variant="secondary" asChild>
                     <Link href="/learn/vocabulary">
-                      Start N4 Vocabulary
+                      Start N3 Vocabulary
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
